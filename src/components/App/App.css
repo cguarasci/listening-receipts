@@ -1,0 +1,62 @@
+body,
+html,
+#root {
+  height: 100%;
+}
+
+html {
+  font-size: 18px;
+}
+
+h1 {
+  margin: 0 auto;
+  padding: 0 0;
+  text-align: center;
+  font-family: 'Avenir', sans-serif;
+  font-size: 1.88rem;
+  color: #fff;
+  width: 100%;
+}
+
+h1 .highlight {
+  color: black;
+}
+
+h2 {
+  font-family: 'Avenir', sans-serif;
+  font-size: 1.55rem;
+}
+
+.App-playlist {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.More-link {
+  justify-content: center;
+  cursor: pointer;
+  width: 150px;
+  height: 20px;
+  padding: 0.5rem 1rem;
+  border-radius: 54px;
+  background-color: #272727;
+  text-align: center;
+  font-size: .83rem;
+  font-style: normal;
+  text-decoration: none;
+  color: white;
+  transition: background-color .25s;
+  margin-top: 9px;
+}
+
+.More-link:hover {
+  background-color: rgba(100, 100, 100, 0.7);
+}
+
+@media only screen and (max-width: 1020px) {
+  .App-playlist {
+    align-items: center;
+    flex-direction: column;
+  }
+}
