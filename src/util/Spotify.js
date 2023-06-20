@@ -54,7 +54,15 @@ const Spotify = {
 		)
 		.then((jsonResponse) => {
 			if (jsonResponse) {
-				return jsonResponse.display_name; // display_name is the property that holds the user's display name
+				let username = jsonResponse.display_name;
+
+				let printable = /^[\x20-\x7E\u00A0-\u00AC\u00B0-\u00B5\u00B7-\u00BA\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF\u0100-\u017F\u0180-\u024F\u1E00-\u1EFF]+$/;
+
+				username = username.split('').filter(function(char) {
+					return char.match(printable);
+				}).join('');
+
+				return username.trim();
 			}
 			return '';
 		});
