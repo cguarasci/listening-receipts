@@ -1,39 +1,54 @@
 import React from 'react';
 import './Receipt.css';
+// import Spotify from '../../util/Spotify';
+// import psychologyTodayQR from './qr-code.png';
 
 class Receipt extends React.Component {
   render() {
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleString();
+
     return (
-      <div>
-        <h2 style={{ color: "black", margin: 0, textShadow: "0 0 0 black" }}>Receipt:</h2>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <div className="top-info" style={{ padding: '20px' }}>
+            <div>
+                <h2 style={{ textAlign: "center" }}>{this.props.username}'s Spotify Receipt</h2>
+                <p style={{ textAlign: "center" }}>Coded by Casey</p>
+                <p style={{ textAlign: "center" }}>@lorrainesdomain</p>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <p>{formattedDate}</p>
+                <p>-HERE-</p>
+            </div>
+            {/* <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <p>Order: 235471</p>
+                <p>Casey Guarasci</p>
+            </div> */}
+        </div>
         <table className="receipt-table">
-          <thead>
-            <tr>
-              <th>Count</th>
-              <th>Song</th>
-              <th>Cost</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.tracks.map(track => (
-              <tr key={track.id}>
-                <td>
-                    {track.count}x
-                </td>
-                <td>
-                    {track.name}
-                    <br></br>
-                    {track.artist.name}
-                </td>
-                <td>
-                    ${track.cost}
-                </td>
-              </tr>
-            ))}
-          </tbody>
+                {this.props.tracks.map(track => (
+                    <tr key={track.id}>
+                        <td style={{ paddingLeft: "30px" }}>
+                            {track.count}x
+                        </td>
+                        <td>
+                            {track.name}
+                            <br></br>
+                            <em>{track.artist.name}</em>
+                        </td>
+                        <td style={{ textAlign: "end", paddingRight: "30px" }}>
+                            ${track.cost}
+                        </td>
+                    </tr>
+                ))}
         </table>
-        Coupons:
-        <p>Coupon</p>
+        {this.props.analysis.map((coupon, index) => (
+            <div style={{ textAlign: 'center' }}>
+                <p>* * * * * * * * * * * * * * * * * * * * * * * * * *</p>
+                <div style={{ textAlign: 'center' }} key={index} dangerouslySetInnerHTML={{ __html: coupon.description }}></div>
+                {coupon.image && <div><br></br><img height="100px" src={process.env.PUBLIC_URL + "/assets/" + coupon.image} alt="Coupon" /></div>}
+            </div>
+        ))}
       </div>
     );
   }

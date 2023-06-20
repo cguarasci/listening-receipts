@@ -1,12 +1,16 @@
 import React from 'react';
-// import './SearchResults.css';
+import Spotify from '../../util/Spotify';
 
 class Logout extends React.Component {
+  handleLogout = () => {
+    Spotify.logout();
+  }
+
   render() {
     return (
       <div className="Logout">
-        <div style={{margin: "0px"}}>
-          <h2 style={{margin: "0px"}}>Logout</h2>
+        <div style={{ margin: "0px" }}>
+          <button onClick={this.handleLogout}>Logout</button>
         </div>
       </div>
     );

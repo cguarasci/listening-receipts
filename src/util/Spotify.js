@@ -1,10 +1,11 @@
 const clientId = 'a4c7f9b5f41b4581a13e0812a8dfa8b4';
 const redirect_uri = 'http://localhost:3000/';
-const scopes = 'user-top-read playlist-modify-public user-read-recently-played';
+const scopes = 'user-top-read user-read-recently-played';
 let accessToken;
 
 const Spotify = {
 	getAccessToken() {
+		console.log('URL:', window.location.href);
 		if (accessToken) {
 			return accessToken;
 		}
@@ -24,6 +25,41 @@ const Spotify = {
 		}
 	},
 
+	logout() {
+		accessToken = null;
+		window.history.pushState('Access Token', null, '/');
+		window.location = 'https://accounts.spotify.com/logout';
+		Spotify.getAccessToken();
+	},
+
+	getUsername() {
+		const accessToken = Spotify.getAccessToken();
+		const headers = {
+			Authorization: `Bearer ${accessToken}`,
+		};
+	
+		return fetch('https://api.spotify.com/v1/me', {
+			headers: headers,
+		})
+		.then(
+			(response) => {
+				if (response.ok) {
+					return response.json();
+				}
+				throw new Error('Request failed!');
+			},
+			(networkError) => {
+				console.log(networkError.message);
+			}
+		)
+		.then((jsonResponse) => {
+			if (jsonResponse) {
+				return jsonResponse.display_name; // display_name is the property that holds the user's display name
+			}
+			return '';
+		});
+	},
+	  
 	getRecentlyPlayedTracks() {
 		const accessToken = Spotify.getAccessToken();
 		const streamingPrice = 0.003;
@@ -53,7 +89,7 @@ const Spotify = {
 					const track = item.track;
 					if (trackMap[track.id]) {
 						trackMap[track.id].count += 1;
-						trackMap[track.id].cost = +(streamingPrice * trackMap[track.id].count).toFixed(3);;
+						trackMap[track.id].cost = +(streamingPrice * trackMap[track.id].count).toFixed(3);
 					} else {
 						trackMap[track.id] = {
 							count: 1,
