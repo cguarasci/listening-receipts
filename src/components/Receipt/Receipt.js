@@ -9,7 +9,7 @@ class Receipt extends React.Component {
     const formattedDate = currentDate.toLocaleString();
 
     return (
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <div style={{ display: "flex", flexDirection: "column", padding: "30px 0" }}>
         <div className="top-info" style={{ padding: '20px' }}>
             <div>
                 <h2 style={{ textAlign: "center" }}>{this.props.username}'s Spotify Receipt</h2>
@@ -43,7 +43,7 @@ class Receipt extends React.Component {
                 ))}
         </table>
         {this.props.analysis.map((coupon, index) => (
-            <div style={{ textAlign: 'center' }}>
+            <div style={{ padding: '30px 30px 0px 30px', textAlign: 'center' }}>
                 <p>* * * * * * * * * * * * * * * * * * * * * * * * * *</p>
                 <div style={{ textAlign: 'center' }} key={index} dangerouslySetInnerHTML={{ __html: coupon.description }}></div>
                 {coupon.image && <div><br></br><img height="100px" src={process.env.PUBLIC_URL + "/assets/" + coupon.image} alt="Coupon" /></div>}
