@@ -1,6 +1,9 @@
 # spotify-receipts
 A receipt printer that roasts your Spotify music taste by printing out how much you made each artist and coupons/info in a joking tone.
 
+## Example of a receipt:
+<img width="300" alt="sample-receipt" src="./public/assets/sample_receipt.png">
+
 ## Getting Started
 
 To run the app locally, follow these steps:
