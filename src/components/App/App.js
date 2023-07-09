@@ -11,29 +11,49 @@ class App extends Component {
     this.state = {
       tracks: [],
       analysis: [],
-      username: ""
+      username: "",
+      isLoading: true,
     };
+    this.printRef = React.createRef();
   }
 
   async componentDidMount() {
     try {
       const tracks = await Spotify.getRecentlyPlayedTracks();
-      const analysis = Analysis.analyzeTracks(tracks);
+      const analysis = await Analysis.analyzeTracks(tracks);
       const username = await Spotify.getUsername();
-      this.setState({ tracks, analysis, username });
+      this.setState({ tracks, analysis, username, isLoading: false });
     } catch (error) {
       console.log(error);
     }
   }
 
+  handlePrintComplete = () => {
+    console.log('Receipt printed!');
+  };
+
   render() {
+    const { tracks, analysis, username, isLoading } = this.state;
+
     return (
       <div>
         <Logout />
-        <p>Printing your receipt! Click above to logout.</p>
-        <Receipt username={this.state.username} tracks={this.state.tracks} analysis={this.state.analysis} />
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <div>
+            <Receipt
+              printRef={this.printRef}
+              username={username}
+              tracks={tracks}
+              analysis={analysis}
+              isLoading={isLoading}
+              onPrintComplete={this.handlePrintComplete}
+            />
+          </div>
+        )}
       </div>
-    )
+    );
   }
 }
 

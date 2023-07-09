@@ -67,52 +67,97 @@ const Spotify = {
 			return '';
 		});
 	},
+
+	async getAudioFeatures(trackIds) {
+		const accessToken = this.getAccessToken();
+		const headers = {
+		  Authorization: `Bearer ${accessToken}`
+		};
+		const trackIdsString = trackIds.join(',');
+	
+		const response = await fetch(`https://api.spotify.com/v1/audio-features/?ids=${trackIdsString}`, {
+		  headers: headers
+		});
+	
+		if (response.ok) {
+		  const jsonResponse = await response.json();
+		  return jsonResponse.audio_features; // return the audio feature information
+		} else {
+		  throw new Error('Request failed!');
+		}
+	},
+
+	getGenre(artistId) {
+		const accessToken = Spotify.getAccessToken();
+		const headers = {
+		  Authorization: `Bearer ${accessToken}`,
+		};
+	
+		return fetch(`https://api.spotify.com/v1/artists/${artistId}`, {
+		  headers: headers,
+		})
+		  .then((response) => {
+			if (response.ok) {
+			  return response.json();
+			}
+			throw new Error('Request failed!');
+		  })
+		  .then((jsonResponse) => {
+			if (jsonResponse && jsonResponse.genres) {
+			  return jsonResponse.genres || ''; // Assuming the first genre is the primary genre
+			}
+			return '';
+		  });
+	},
 	  
 	getRecentlyPlayedTracks() {
 		const accessToken = Spotify.getAccessToken();
 		const streamingPrice = 0.003;
 		const headers = {
-			Authorization: `Bearer ${accessToken}`,
+		  Authorization: `Bearer ${accessToken}`,
 		};
 		return fetch('https://api.spotify.com/v1/me/player/recently-played?limit=50', {
-			headers: headers,
+		  headers: headers,
 		})
-			.then(
-				(response) => {
-					if (response.ok) {
-						return response.json();
-					}
-					throw new Error('Request failed!');
-				},
-				(networkError) => {
-					console.log(networkError.message);
-				}
-			)
-			.then((jsonResponse) => {
-				if (!jsonResponse.items) {
-					return [];
-				}
-				let trackMap = {};
-				jsonResponse.items.forEach((item) => {
-					const track = item.track;
-					if (trackMap[track.id]) {
-						trackMap[track.id].count += 1;
-						trackMap[track.id].cost = +(streamingPrice * trackMap[track.id].count).toFixed(3);
-					} else {
-						trackMap[track.id] = {
-							count: 1,
-							id: track.id,
-							name: track.name,
-							artist: {
-								name: track.artists[0].name,
-								id: track.artists[0].id
-							},
-							cost: 0.003
-						}
-					}
-				});
-				return Object.values(trackMap);
-			});
+		  .then(
+			(response) => {
+			  if (response.ok) {
+				return response.json();
+			  }
+			  throw new Error('Request failed!');
+			},
+			(networkError) => {
+			  console.log(networkError.message);
+			}
+		  )
+		  .then(async (jsonResponse) => {
+			if (!jsonResponse.items) {
+			  return [];
+			}
+			let trackMap = {};
+			for (const item of jsonResponse.items) {
+			  const track = item.track;
+			  const artistId = track.artists[0].id;
+			  if (trackMap[track.id]) {
+				trackMap[track.id].count += 1;
+				trackMap[track.id].cost = +(streamingPrice * trackMap[track.id].count).toFixed(3);
+			  } else {
+				const genre = await Spotify.getGenre(artistId);
+				trackMap[track.id] = {
+				  count: 1,
+				  id: track.id,
+				  name: track.name,
+				  artist: {
+					name: track.artists[0].name,
+					id: artistId,
+				  },
+				  genre: genre.join(" "),
+				  cost: 0.003,
+				};
+			  }
+			}
+			return Object.values(trackMap);
+		});
 	}
 };
 

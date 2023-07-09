@@ -24,12 +24,17 @@
     flex-direction: column;
 }
 
+.receipt-container {
+    font-weight: bold;
+}
+
 .receipt-table {
     color: black;
     font-weight: 100;
     text-shadow: 0 0 0 black;
     border-collapse: collapse;
-  }
+    font-weight: bold;
+}
   
 .receipt-table th,
 .receipt-table td {
