@@ -2,7 +2,12 @@
 A receipt printer that roasts your Spotify music taste by printing out how much you made each artist and coupons/info in a joking tone.
 
 ## Example of a receipt:
-| <img alt="sample-receipt" src="./public/assets/sample_receipt.jpg"> | <img alt="real-sample-receipt" src="./public/assets/real_sample_receipt.jpg"> |
+<table>
+<tr>
+<th> <img alt="sample-receipt" src="./public/assets/sample_receipt.jpg"> </th>
+<th> <img alt="real-sample-receipt" src="./public/assets/real_sample_receipt.jpg"> </th>
+</tr>
+</table>
 
 ## Getting Started
 
