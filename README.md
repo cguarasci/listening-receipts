@@ -4,8 +4,8 @@ A receipt printer that roasts your Spotify music taste by printing out how much 
 ## Example of a receipt:
 <table>
 <tr>
-<th> <img width="300" alt="sample-receipt" src="./public/assets/sample_receipt.jpg"> </th>
-<th> <img width="300" alt="sample-receipt" src="./public/assets/real_sample_receipt.jpg"> </th>
+<th> <img width="50" alt="sample-receipt" src="./public/assets/sample_receipt.jpg"> </th>
+<th> <img width="200" alt="sample-receipt" src="./public/assets/real_sample_receipt.jpg"> </th>
 </tr>
 <tr>
 <td>
