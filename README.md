@@ -27,7 +27,9 @@ To run the app locally, follow these steps:
     npm install
     ```
 
-4. Start the development server by running:
+4. Change the Spotify API client ID to the client ID for your app (made in the Spotify for Developers portal) and the Redirect URIs to https://localhost:3000.
+
+5. Start the development server by running:
 
     ```
     npm run start
@@ -35,7 +37,7 @@ To run the app locally, follow these steps:
 
     This command will transpile your code using Babel and bundle it with Webpack. Then, it will start the development server.
 
-5. Open your web browser and visit http://localhost:3000 to access the app.
+6. Open your web browser and visit http://localhost:3000 to access the app.
 
 ## Available Scripts
 
