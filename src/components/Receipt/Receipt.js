@@ -42,7 +42,7 @@ class ComponentToPrint extends React.Component {
             </table>
             {this.props.analysis.map((coupon, index) => (
                 <div style={{ padding: '30px 30px 0px 30px', textAlign: 'center' }}>
-                    <p>* * * * * * * * * * * * * * * * * * * * * * * * *</p>
+                    <p>* * * * * * * * * * * * * * * * * * * * * * *</p>
                     <div style={{ textAlign: 'center' }} key={index} dangerouslySetInnerHTML={{ __html: coupon.description }}></div>
                     {coupon.image && <div><br></br><img height="100px" src={process.env.PUBLIC_URL + "/assets/" + coupon.image} alt="Coupon" /></div>}
                 </div>
