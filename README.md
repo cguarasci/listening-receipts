@@ -18,7 +18,7 @@ To run the app locally, follow these steps:
 2. Navigate to the project directory:
 
    ```
-   cd spotify-receipts
+   cd listening-receipts
    ```
 
 3. Install the dependencies by running:
