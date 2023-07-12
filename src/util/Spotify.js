@@ -1,5 +1,5 @@
 const clientId = 'a4c7f9b5f41b4581a13e0812a8dfa8b4';
-const redirect_uri = 'http://localhost:3000/';
+const redirect_uri = 'https://spotify-receipts.vercel.app';
 const scopes = 'user-top-read user-read-recently-played';
 let accessToken;
 
