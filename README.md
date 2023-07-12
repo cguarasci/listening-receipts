@@ -1,4 +1,4 @@
-# spotify-receipts
+# listening-receipts
 A receipt printer that roasts your Spotify music taste by printing out how much you made each artist and coupons/info in a joking tone.
 
 ## Example of a receipt:
@@ -27,7 +27,7 @@ To run the app locally, follow these steps:
     npm install
     ```
 
-4. Change the Spotify API client ID to the client ID for your app (made in the Spotify for Developers portal) and the Redirect URIs to https://localhost:3000.
+4. Change the Spotify API client ID to the client ID for your app (made in the Spotify for Developers portal) and the redirect URIs to https://localhost:3000.
 
 5. Start the development server by running:
 
