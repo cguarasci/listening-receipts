@@ -52,6 +52,7 @@ class App extends Component {
             />
           </div>
         )}
+        <a href="https://www.spotify.com" alt="Spotify Link"><img className="spotify-logo" width="100px" src={process.env.PUBLIC_URL + "/assets/spotify_logo.png"} alt="Spotify Logo" /></a>
       </div>
     );
   }

@@ -27,6 +27,12 @@ h2 {
   font-size: 1.55rem;
 }
 
+.spotify-logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .App-playlist {
   display: flex;
   justify-content: space-between;

@@ -153,6 +153,7 @@ const Spotify = {
 				  },
 				  genre: genre.join(" "),
 				  cost: 0.003,
+				  url: track.uri
 				};
 			  }
 			}

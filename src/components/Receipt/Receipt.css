@@ -28,6 +28,11 @@
     font-weight: bold;
 }
 
+.unformatted-link {
+    color: black;
+    text-decoration: none;
+}
+
 .receipt-table {
     color: black;
     font-weight: 100;

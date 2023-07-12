@@ -29,9 +29,11 @@ class ComponentToPrint extends React.Component {
                               {track.count}x
                             </td>
                             <td>
-                              {track.name}
-                              <br />
-                              <em>{track.artist.name}</em>
+                              <a className="unformatted-link" href={track.url} alt="Song Link">
+                                {track.name}
+                                <br />
+                                <em>{track.artist.name}</em>
+                              </a>
                             </td>
                             <td style={{ textAlign: "end", paddingRight: "30px" }}>
                               ${track.cost}
