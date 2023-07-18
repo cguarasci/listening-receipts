@@ -44,7 +44,7 @@ const Analysis = {
                     image: "qr-codes/psychology-today.png"
                 });
 
-                count.therapist = 1;
+                count.hairDye = 1;
             }
         });
 
