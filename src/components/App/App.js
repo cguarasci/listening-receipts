@@ -41,7 +41,7 @@ class App extends Component {
         {isLoading ? (
           <p>Loading...</p>
         ) : (
-          <div style={{display: 'flex', flexDirection: 'column'}}>
+          <div>
             <Receipt
               printRef={this.printRef}
               username={username}

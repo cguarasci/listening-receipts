@@ -57,7 +57,7 @@ class ComponentToPrint extends React.Component {
 class Receipt extends React.Component {
     render() {
       return (
-        <div>
+        <div style={{display: 'flex', flexDirection: 'column'}}>
           <ReactToPrint
             trigger={() => <button className="print-button">Print this out!</button>}
             content={() => this.componentRef}
