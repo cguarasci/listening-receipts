@@ -38,7 +38,6 @@ class App extends Component {
     return (
       <div>
         <Logout />
-        <p>Instructions</p>
         {isLoading ? (
           <p>Loading...</p>
         ) : (
