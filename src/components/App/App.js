@@ -37,7 +37,7 @@ class App extends Component {
 
     return (
       <div>
-        <Logout className="logout-button" />
+        <Logout />
         <p>Instructions</p>
         {isLoading ? (
           <p>Loading...</p>

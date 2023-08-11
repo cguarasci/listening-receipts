@@ -1,5 +1,6 @@
 import React from 'react';
 import Spotify from '../../util/Spotify';
+import './Logout.css';
 
 class Logout extends React.Component {
   handleLogout = () => {
@@ -10,7 +11,7 @@ class Logout extends React.Component {
     return (
       <div className="Logout">
         <div style={{ margin: "0px" }}>
-          <button onClick={this.handleLogout}>Logout</button>
+          <button className='logout-button' onClick={this.handleLogout}>Logout</button>
         </div>
       </div>
     );
