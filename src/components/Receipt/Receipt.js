@@ -59,7 +59,7 @@ class Receipt extends React.Component {
       return (
         <div>
           <ReactToPrint
-            trigger={() => <button className="logout-button">Print this out!</button>}
+            trigger={() => <button className="print-button">Print this out!</button>}
             content={() => this.componentRef}
             onAfterPrint={this.props.onPrintComplete}
           />
