@@ -37,11 +37,12 @@ class App extends Component {
 
     return (
       <div>
-        <Logout />
+        <Logout className="logout-button" />
+        <p>Instructions</p>
         {isLoading ? (
           <p>Loading...</p>
         ) : (
-          <div>
+          <div style={{display: 'flex', flexDirection: 'column'}}>
             <Receipt
               printRef={this.printRef}
               username={username}

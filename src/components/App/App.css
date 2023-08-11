@@ -60,6 +60,25 @@ h2 {
   background-color: rgba(100, 100, 100, 0.7);
 }
 
+.logout-button {
+  display: inline-block;
+  padding: 6px 20px;
+  margin: 10px;
+  font-size: 10;
+  color: white;
+  background-color: #d2483a;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #b14135;
+}
+
 @media only screen and (max-width: 1020px) {
   .App-playlist {
     align-items: center;

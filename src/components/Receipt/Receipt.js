@@ -9,7 +9,7 @@ class ComponentToPrint extends React.Component {
     const formattedDate = currentDate.toLocaleString();
 
     return (
-        <div className="receipt-container"  style={{ display: "flex", flexDirection: "column", paddingTop: "30px", paddingBottom: "50px" }}>
+        <div className="receipt-container"  style={{ display: "flex", flexDirection: "column", paddingBottom: "50px" }}>
             <div className="top-info" style={{ padding: '20px' }}>
                 <div>
                     <h3 style={{ textAlign: "center" }}>{this.props.username}'s Spotify Receipt</h3>
@@ -59,7 +59,7 @@ class Receipt extends React.Component {
       return (
         <div>
           <ReactToPrint
-            trigger={() => <button>Print this out!</button>}
+            trigger={() => <button className="logout-button">Print this out!</button>}
             content={() => this.componentRef}
             onAfterPrint={this.props.onPrintComplete}
           />

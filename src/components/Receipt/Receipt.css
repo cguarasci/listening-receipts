@@ -50,3 +50,23 @@
 .receipt-table td:not(:last-child) {
     border-right: 1px solid black;
 } */
+
+.print-button {
+    padding: 6px 10px;
+    width: 150px;
+    font-size: 20px;
+    color: white;
+    background-color: #17a715;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    align-self: center;
+    transition: background-color 0.3s ease;
+    margin: 10px;
+  }
+  
+  .print-button:hover {
+    background-color: #128110;
+  }
