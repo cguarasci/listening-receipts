@@ -39,7 +39,7 @@ const Analysis = {
             //You have played this song way too many times - 30 (by track count)
             if (count.repeat === 0 && track.count > 40) {
                 coupons.push({
-                    description: "Based on your " + track.count + " count order of " + track.artist.name + "'s " + track.name + ", our system has called the police. Please hold this receipt over your head and await your federally mandated intervention. Refrain in your wait from reaching for your phone to play " + track.artist.name + "'s " + track.name + ". It has been played enough.",
+                    description: "Based on your " + track.count + " count order of " + track.artist.name + "'s " + track.name + ", our system has flagged a concern for your wellbeing. If staff sees you reaching for your phone to play " + track.artist.name + "'s " + track.name + " again, they are mandated to hold an intervention. There are no more lyrics to interpret. It has been played enough.",
                 });
 
                 count.repeat = 1;
