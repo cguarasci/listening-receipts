@@ -70,7 +70,7 @@ const Analysis = {
             if (count.chiropractor === 0 && chiropractorArtistNames.includes(track.artist.name)) {
                 
                 coupons.push({
-                    description: "Based on your order of "  + track.artist.name + ", we've extended you a special offer on chiropractor services to help alleviate some of the damage from your anticipated history of headbanging to EDM."
+                    description: "Based on your order of "  + track.artist.name + ", we've added a special offer on chiropractor services to your rewards account to help alleviate some of the damage from your anticipated history of headbanging to EDM."
                 });
 
                 count.chiropractor = 1;
