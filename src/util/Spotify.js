@@ -3,26 +3,63 @@ const redirect_uri = 'https://listening-receipts.vercel.app';
 const scopes = 'user-read-recently-played';
 let accessToken;
 
+async function sha256(plain) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(plain);
+  return await crypto.subtle.digest('SHA-256', data);
+}
+
+function base64encode(buffer) {
+  return btoa(String.fromCharCode(...new Uint8Array(buffer)))
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '');
+}
+
 const Spotify = {
-	getAccessToken() {
-		console.log('URL:', window.location.href);
-		if (accessToken) {
-			return accessToken;
+	async getAccessToken() {
+		if (accessToken) return accessToken;
+
+		const params = new URLSearchParams(window.location.search);
+		const code = params.get('code');
+
+		if (!code) {
+		const verifier = crypto.randomUUID() + crypto.randomUUID();
+		localStorage.setItem('verifier', verifier);
+
+		const challenge = base64encode(await sha256(verifier));
+
+		window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirect_uri)}&scope=${encodeURIComponent(scopes)}&code_challenge_method=S256&code_challenge=${challenge}`;
+		return;
 		}
-	
-		const newAccessToken = window.location.href.match(/access_token=([^&]*)/);
-		const newExpiresIn = window.location.href.match(/expires_in=([^&]*)/);
-	
-		if (newAccessToken && newExpiresIn) {
-			accessToken = newAccessToken[1];
-			const expiresIn = Number(newExpiresIn[1]);
-			window.setTimeout(() => (accessToken = ''), expiresIn * 1000);
-			window.history.pushState('Access Token', null, '/');
-			return accessToken;
-		} else {
-			const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=${scopes}&show_dialog=true&redirect_uri=${redirect_uri}`;
-			window.location = accessUrl;
-		}
+
+		const verifier = localStorage.getItem('verifier');
+
+		const body = new URLSearchParams({
+		client_id: clientId,
+		grant_type: 'authorization_code',
+		code,
+		redirect_uri,
+		code_verifier: verifier,
+		});
+
+		const response = await fetch('https://accounts.spotify.com/api/token', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+		body,
+		});
+
+		const data = await response.json();
+
+		console.log(response.status);
+		console.log(data);
+
+		accessToken = data.access_token;
+		window.history.replaceState({}, '', '/');
+
+		return accessToken;
 	},
 
 	logout() {
@@ -32,8 +69,8 @@ const Spotify = {
 		Spotify.getAccessToken();
 	},
 
-	getUsername() {
-		const accessToken = Spotify.getAccessToken();
+	async getUsername() {
+		const accessToken = await Spotify.getAccessToken();
 		const headers = {
 			Authorization: `Bearer ${accessToken}`,
 		};
@@ -69,7 +106,7 @@ const Spotify = {
 	},
 
 	async getAudioFeatures(trackIds) {
-		const accessToken = this.getAccessToken();
+		const accessToken = await this.getAccessToken();
 		const headers = {
 		  Authorization: `Bearer ${accessToken}`
 		};
@@ -87,8 +124,8 @@ const Spotify = {
 		}
 	},
 
-	getGenre(artistId) {
-		const accessToken = Spotify.getAccessToken();
+	async getGenre(artistId) {
+		const accessToken = await Spotify.getAccessToken();
 		const headers = {
 		  Authorization: `Bearer ${accessToken}`,
 		};
@@ -110,8 +147,8 @@ const Spotify = {
 		  });
 	},
 	  
-	getRecentlyPlayedTracks() {
-		const accessToken = Spotify.getAccessToken();
+	async getRecentlyPlayedTracks() {
+		const accessToken = await Spotify.getAccessToken();
 		const streamingPrice = 0.003;
 		const headers = {
 		  Authorization: `Bearer ${accessToken}`,
