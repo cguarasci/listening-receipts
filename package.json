@@ -5,15 +5,14 @@
   "dependencies": {
     "node-printer": "^1.0.4",
     "print-js": "^1.6.0",
-    "puppeteer": "^18.0.5",
+    "puppeteer": "^25.3.0",
     "react": "^16.14.0",
     "react-bootstrap": "^2.5.0",
     "react-colorful": "^5.6.1",
     "react-dom": "^16.14.0",
-    "react-scripts": "^1.0.17",
+    "react-scripts": "^5.0.1",
     "react-to-print": "^2.14.13",
-    "tinycolor2": "^1.4.2",
-    "yarn": "^1.22.19"
+    "tinycolor2": "^1.4.2"
   },
   "scripts": {
     "predeploy": "npm run build",
@@ -25,5 +24,17 @@
   },
   "devDependencies": {
     "gh-pages": "^1.2.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
